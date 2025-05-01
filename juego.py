@@ -1,6 +1,7 @@
+import sys
 import random
 
-def comparar(jugada_humano, jugada_pc): #para cpmparar las jugadas de las rondas
+def validacion(jugada_humano, jugada_pc): #para comparar las jugadas de las rondas
     reglas = {
         "piedra": {"tijera": 1, "papel": -1, "piedra": 0},
         "papel": {"piedra": 1, "tijera": -1, "papel": 0},
@@ -23,18 +24,23 @@ def main():
     print("Bienvenido al juego de Piedra, Papel o Tijeras")
     print("Vas a jugar 3 rondas contra la computadora.\n")
 
-    jugadas_humano = []
+    print("Bienvenido al juego de Piedra, Papel o Tijeras")
 
-    # Pedir las 3 jugadas del usuario
-    jugada_1 = pedir_jugada(1)
-    jugada_2 = pedir_jugada(2)
-    jugada_3 = pedir_jugada(3)
+    if len(sys.argv) == 4:
+        jugadas_humano = [arg.lower() for arg in sys.argv[1:]]
+        for jugada in jugadas_humano:
+            if jugada not in ["piedra", "papel", "tijera"]:
+                print(f"Jugada inválida: {jugada}")
+                return
+    else:
+        print("Vas a jugar 3 rondas contra la computadora.\n")
+        jugadas_humano = [
+            pedir_jugada(1),
+            pedir_jugada(2),
+            pedir_jugada(3)
+        ]
 
-    jugadas_humano.append(jugada_1)
-    jugadas_humano.append(jugada_2)
-    jugadas_humano.append(jugada_3)
-
-    # Generar jugadas aleatorias para la computadora
+    # jugadas aleatorias para la maquina
     jugadas_pc = []
     jugadas_pc.append(random.choice(["piedra", "papel", "tijera"]))
     jugadas_pc.append(random.choice(["piedra", "papel", "tijera"]))
@@ -46,21 +52,21 @@ def main():
     puntos_pc = 0
 
     # Ronda 1
-    resultado_1 = comparar(jugadas_humano[0], jugadas_pc[0])
+    resultado_1 = validacion(jugadas_humano[0], jugadas_pc[0])
     if resultado_1 == 1:
         puntos_humano += 1
     elif resultado_1 == -1:
         puntos_pc += 1
 
     # Ronda 2
-    resultado_2 = comparar(jugadas_humano[1], jugadas_pc[1])
+    resultado_2 = validacion(jugadas_humano[1], jugadas_pc[1])
     if resultado_2 == 1:
         puntos_humano += 1
     elif resultado_2 == -1:
         puntos_pc += 1
 
     # Ronda 3
-    resultado_3 = comparar(jugadas_humano[2], jugadas_pc[2])
+    resultado_3 = validacion(jugadas_humano[2], jugadas_pc[2])
     if resultado_3 == 1:
         puntos_humano += 1
     elif resultado_3 == -1:
