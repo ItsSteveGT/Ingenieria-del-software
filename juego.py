@@ -24,8 +24,6 @@ def main():
     print("Bienvenido al juego de Piedra, Papel o Tijeras")
     print("Vas a jugar 3 rondas contra la computadora.\n")
 
-    print("Bienvenido al juego de Piedra, Papel o Tijeras")
-
     if len(sys.argv) == 4:
         jugadas_humano = [arg.lower() for arg in sys.argv[1:]]
         for jugada in jugadas_humano:
