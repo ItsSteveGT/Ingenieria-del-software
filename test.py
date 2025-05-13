@@ -1,5 +1,5 @@
 import unittest
-from juego import validacion  # reemplaza 'tu_archivo' con el nombre real de tu archivo .py
+from juego import validacion
 
 class TestJuego(unittest.TestCase):
 
